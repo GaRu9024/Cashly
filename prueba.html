@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Pago en línea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Cashly</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Chat bot</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <form id="card-form" action="pay.php" method="post" class="card p-3">
+            <input type="hidden" name="conektaTokenId" id="conektaTokenId" value="">
+            <h3 class="mb-3">Pago en línea</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nombre del tarjetahabiente</label>
+                        <input value="" data-conekta="card[name]" class="form-control" name="name" id="name" type="text">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="card">Número de tarjeta</label>
+                        <input value="4242424242424242" name="card" id="card" data-conekta="card[number]"
+                            class="form-control" type="text" maxlength="16">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cvc">CVC</label>
+                        <input value="" data-conekta="card[cvc]" class="form-control" type="text" maxlength="4">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exp_date">Fecha de expiración (MM/AA)</label>
+                        <div>
+                            <input style="width:50px; display:inline-block" value=""
+                                data-conekta="card[exp_month]" class="form-control" type="text" maxlength="2">
+                            <input style="width:50px; display:inline-block" value=""
+                                data-conekta="card[exp_year]" class="form-control" type="text" maxlength="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" maxlength="200" value="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="description">Concepto</label>
+                        <input class="form-control" type="text" name="description" id="description" maxlength="100"
+                            value="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="total">Monto</label>
+                        <input class="form-control" type="number" name="total" id="total" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-success btn-lg">
+                        <i class="fa fa-check-square"></i> PAGAR
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        Conekta.setPublicKey("key_NFLMnE4mT1fL4s2HRsW5Iru");
+
+        var conektaSuccessResponseHandler = function (token) {
+            $("#conektaTokenId").val(token.id);
+            jsPay();
+        };
+
+        var conektaErrorResponseHandler = function (response) {
+            var $form = $("#card-form");
+            alert(response.message_to_purchaser);
+        };
+
+        $(document).ready(function () {
+            $("#card-form").submit(function (e) {
+                e.preventDefault();
+                var $form = $("#card-form");
+                Conekta.Token.create($form, conektaSuccessResponseHandler, conektaErrorResponseHandler);
+            });
+        });
+
+        function jsPay() {
+            let params = $("#card-form").serialize();
+            let url = "pay.php";
+
+            $.post(url, params, function (data) {
+                if (data == "1") {
+                    alert("Se realizó el pago :D");
+                    window.location.href = "index.html"; // Redirecciona después de un pago exitoso
+                    jsClean();
+                } else {
+                    alert(data);
+                    console.log(data);
+                }
+            });
+        }
+
+        function jsClean() {
+            $(".form-control").val(""); // Limpia el contenido de los campos de entrada
+            $("#conektaTokenId").val("");
+        }
+    </script>
+</body>
+
+</html>

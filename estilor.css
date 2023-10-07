@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px; /* Agregado para dar espacio entre el borde de la pantalla y el contenido */
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en una columna */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.center-container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px; /* Añadido para dar espacio entre el h1 y la tabla */
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+h4 {
+    margin: 5px 0;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    width: 48%;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px; /* Añadido para dar espacio entre los botones y la tabla */
+}
+
+input[type="reset"] {
+    background-color: #f44336;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+}
+button {
+    border: 0;
+    width: 445px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 7px;
+    border-radius: 5px;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hack-Athon</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Bienvenido a Cashly</h1>
+            <h2>Registrarse</h2>
+            <form method="POST" action="registros.php">
+                <table border="0">
+                    <tr>
+                        <td><h4>Usuario:</h4></td>
+                        <td><input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" /></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Correo electrónico:</h4></td>
+                        <td><input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" /></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Contraseña:</h4></td>
+                        <td><input type="password" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" /></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Confirmar Contraseña:</h4></td>
+                        <td><input type="password" id="ccontraseña" name="ccontraseña" placeholder="Repite tu contraseña" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="boton4" type="submit" name="Registrar">Registrar</button>
+                            <input type="reset" onClick="validacion()" value="Cancelar"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
